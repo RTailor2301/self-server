@@ -222,3 +222,5 @@ data/music/
 data/indexes/*.faiss
 
 *.pyc
+
+repotools/
