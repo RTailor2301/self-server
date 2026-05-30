@@ -74,5 +74,17 @@ CREATE TABLE song_embeddings (
     embedding vector(512) NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     PRIMARY KEY (song_id, model),
-    CONSTRAINT check_song_embeddings_dimensions CHECK (dimensions=512),
+    CONSTRAINT check_song_embeddings_dimensions CHECK (dimensions=512)
+);
+
+-- listening events
+
+CREATE TYPE event_type as ENUM ('play_start', 'play_end', 'skip');
+
+CREATE TABLE events (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    song_id UUID NOT NULL REFERENCES songs(id) NOT DELETE CASCADE,
+    event_type event_type NOT NULL,
+    ts TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
