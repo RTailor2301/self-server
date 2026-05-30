@@ -43,3 +43,8 @@ CREATE TABLE song_genres (
     is_primary BOOLEAN NOT NULL DEFAULT FALSE,
     PRIMARY KEY (song_id, genre_id),
 );
+
+-- create primary genre index
+
+CREATE UNIQUE INDEX idx_song_genres_primary ON song_genres (song_id) WHERE is_primary;
+
