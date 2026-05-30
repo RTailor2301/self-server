@@ -64,3 +64,15 @@ CREATE TABLE album_genres (
 );
 
 CREATE UNIQUE INDEX idx_album_genres_primary ON album_genres (album_id) WHERE is_primary;
+
+-- Content embeddings (pgvector)
+
+CREATE TABLE song_embeddings (
+    song_id UUID NOT NULL REFERENCES songs(id) ON DELETE CASCADE,
+    model VARCHAR(64) NOT NULL,
+    dimensions SMALLINT NOT NULL,
+    embedding vector(512) NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    PRIMARY KEY (song_id, model),
+    CONSTRAINT check_song_embeddings_dimensions CHECK (dimensions=512),
+);
