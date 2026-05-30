@@ -48,3 +48,19 @@ CREATE TABLE song_genres (
 
 CREATE UNIQUE INDEX idx_song_genres_primary ON song_genres (song_id) WHERE is_primary;
 
+CREATE TABLE albums (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title VARCHAR(512) NOT NULL,
+    artist VARCHAR(256) NOT NULL DEFAULT '',
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    CONSTRAINT uq_albums_title_artist UNIQUE (title, artist)
+);
+
+CREATE TABLE album_genres (
+    album_id UUID NOT NULL REFERENCES albums(id) ON DELETE CASCADE,
+    genre_id SMALLINT NOT NULL REFERENCES albums(id) ON DELETE CASCADE,
+    is_primary BOOLEAN NOT NULL DEFAULT FALSE,
+    PRIMARY KEY (album_id, genre_id),
+);
+
+CREATE UNIQUE INDEX idx_album_genres_primary ON album_genres (album_id) WHERE is_primary;
