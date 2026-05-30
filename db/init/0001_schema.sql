@@ -35,3 +35,11 @@ CREATE TABLE genres (
     name VARCHAR(64) NOT NULL,
     CONSTRAINT uq_genres_name UNIQUE (name),
 );
+
+
+CREATE TABLE song_genres (
+    song_id UUID NOT NULL REFERENCES songs(id) ON DELETE CASCADE,
+    genre_id SMAULL REFERENCES genres(id) ON DELETE CASCADE,
+    is_primary BOOLEAN NOT NULL DEFAULT FALSE,
+    PRIMARY KEY (song_id, genre_id),
+);
