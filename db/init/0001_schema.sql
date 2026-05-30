@@ -88,3 +88,12 @@ CREATE TABLE events (
     event_type event_type NOT NULL,
     ts TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+-- Index
+
+CREATE INDEX idx_events_user_ts ON events (user_id, ts);
+CREATE INDEX idx_events_song on evnets (song_id);
+CREATE INDEX idx_songs_artist on songs (artist);
+CREATE INDEX idx_songs_album_id songs (album_id);
+CREATE INDEX idx_song_genres_genre_id ON song_genres (genre_id);
+CREATE INDEX idx_album_genres_genre_id ON album_genres (genre_id);
