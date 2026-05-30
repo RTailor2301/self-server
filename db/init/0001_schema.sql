@@ -101,3 +101,4 @@ CREATE INDEX idx_album_genres_genre_id ON album_genres (genre_id);
 
 CREATE INDEX idx_song_embeddings_hnsw on song_embeddings USING hnsw (embedding vector_cosine_ops);
 
+-- TODO: create view with songs joined with genres for query optimization when scaling
