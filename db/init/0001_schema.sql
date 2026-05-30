@@ -27,3 +27,11 @@ CREATE TABLE songs (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     CONSTRAINT uq_songs_file_path UNIQUE(file_path)
 );
+
+-- Genres - many-to-many for mutli-genre
+
+CREATE TABLE genres (
+    id SMALLSERIAL PRIMARY KEY,
+    name VARCHAR(64) NOT NULL,
+    CONSTRAINT uq_genres_name UNIQUE (name),
+);
