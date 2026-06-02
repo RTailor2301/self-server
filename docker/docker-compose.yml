@@ -1,0 +1,17 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: self-server-db
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgpass
+      POSTGRES_DB: pgdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # run sql files in db/init/ once on first container start
+      - ../db/init:/docker-entrypoint-initdb.d:ro # set read only
+
+volumes:
+  pgdata:
