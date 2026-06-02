@@ -1,5 +1,5 @@
 # self-server
-Self-hosted server for my things
+A self-hosted music platform with a custom multi-stage recommendation engine
 
 ## stack
 
