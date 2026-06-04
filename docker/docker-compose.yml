@@ -2,7 +2,7 @@ services:
   db:
     image: pgvector/pgvector:pg16
     container_name: self-server-db
-    restart: unless_stopped
+    restart: unless-stopped
     env_file:
       ../.env
     environment:
