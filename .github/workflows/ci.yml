@@ -1,0 +1,12 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  POSTGRES_USER: musicnet
+  POSTGRES_PASSWORD: musicnet
+  POSTGRES_DB: musicnet
+  DATABASE_URL: postgresql://musicnet:musicnet@127.0.0.1:5432/music
