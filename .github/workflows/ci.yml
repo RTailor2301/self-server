@@ -30,3 +30,11 @@ jobs:
       
       - name: Start Postgres
         run: docker compose --env-file .env -f docker/docker-compose.yml up -d --wait
+
+      - name: Check extensions and schema
+        run: |
+          docker exec self-server-db psql -U musicnet -d musicnet -c \
+            "SELECT extname FROM pg_extension WHERE extname IN ('vector', 'pgcrypto') ORDER BY extname;"
+          docker exec self-server-db psql -U musicnet -d musicnet -c "\dt"
+
+      
