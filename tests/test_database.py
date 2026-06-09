@@ -26,3 +26,8 @@ def test_extension() -> None:
             )
         ).fetchall()
     assert [row[0] for row in rows] == ["pgcrypto", "vector"]
+
+def test_schema_tables() -> None:
+    tables = set(inspect(engine).get_table_names())
+    missing = EXPECTED_TABLES - tables
+    assert not missing, f"missing tables: {missing}"
