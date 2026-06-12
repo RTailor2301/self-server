@@ -1,3 +1,8 @@
+# MusicNet CI Pipeline
+# Spin up temporary containerized Postgres/Docker instance
+# Run main checks (health, env var loading, extensions, schema, dependencies)
+# Run forced stop
+
 name: CI
 
 on:
