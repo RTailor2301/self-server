@@ -5,10 +5,6 @@ services:
     restart: unless-stopped
     env_file:
       ../.env
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       # local access
       - "127.0.0.1:5432:5432"
@@ -18,7 +14,8 @@ services:
       - ../db/init:/docker-entrypoint-initdb.d:ro # set read only
 
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      # $$ for expansion to the container shell
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s
       timeout: 5s
       retries: 5

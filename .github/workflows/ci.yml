@@ -30,7 +30,7 @@ jobs:
           POSTGRES_USER=musicnet
           POSTGRES_PASSWORD=musicnet
           POSTGRES_DB=musicnet
-          DATABASE_URL: postgresql://musicnet:musicnet@127.0.0.1:5432/musicnet
+          DATABASE_URL=postgresql://musicnet:musicnet@127.0.0.1:5432/musicnet
           EOF
       
       - name: Start Postgres
